@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tesla Authorization Callback</title>
+</head>
+<body>
+  <h2>Tesla 인증 코드</h2>
+  <p id="message">인증 코드를 확인하는 중입니다...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    const message = document.getElementById("message");
+
+    if (code) {
+      message.innerHTML =
+        "<p>인증이 완료되었습니다.</p>" +
+        "<p>주소창의 <b>code=</b> 뒤에 있는 값을 사용하면 됩니다.</p>";
+    } else {
+      message.innerHTML =
+        "<p>인증 코드가 없습니다.</p>";
+    }
+  </script>
+
+</body>
+</html>
