@@ -1,1 +1,6 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#071426"/>
+  <path d="M256 100c-30 0-48 25-48 52 0 18 9 31 22 42l-58 20c-46 16-80 56-91 104l-18 76h74l26-67c9-22 26-37 48-43l45-13 45 13c22 6 39 21 48 43l26 67h74l-18-76c-11-48-45-88-91-104l-58-20c13-11 22-24 22-42 0-27-18-52-48-52z" fill="#168bff"/>
+  <path d="M106 249l-45 35 47 6M406 249l45 35-47 6" fill="none" stroke="#8fd2ff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="256" y="458" font-family="Arial,sans-serif" font-weight="900" font-size="66" text-anchor="middle" fill="#fff">4주</text>
+</svg>
