@@ -1,307 +1,155 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101114">
-<title>4주 운동 프로그램</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071426">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="어깨4주">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>어깨4주</title>
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #101114;
-  --panel: #1c1e24;
-  --accent: #b7ff3c;
-  --muted: #a2a5af;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: #f6f6f7;
-  font-family: Arial, "Malgun Gothic", sans-serif;
-}
-header {
-  padding: 30px 20px;
-  text-align: center;
-  background: linear-gradient(145deg,#272b31,#101114);
-}
-header h1 { margin: 0 0 8px; font-size: 28px; }
-header p { margin: 0; color: var(--muted); }
-main { max-width: 760px; margin: auto; padding: 20px; }
-.hero {
-  background: linear-gradient(120deg,#333a2b,#1b1e19);
-  border-radius: 18px;
-  padding: 24px;
-  margin-bottom: 20px;
-}
-.hero .tag { color: var(--accent); font-weight: bold; }
-.hero h2 { margin-bottom: 8px; }
-.hero p { color: #d0d2d5; }
-.weeks {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 8px;
-  margin: 20px 0;
-}
-.week {
-  background: var(--panel);
-  color: white;
-  border: 1px solid #383b43;
-  border-radius: 12px;
-  padding: 14px 4px;
-  cursor: pointer;
-  font-size: 15px;
-}
-.week.active {
-  background: var(--accent);
-  color: #141414;
-  border-color: var(--accent);
-  font-weight: bold;
-}
-.summary {
-  background: var(--panel);
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 16px;
-}
-.progress-track {
-  height: 9px;
-  background: #393c44;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 12px;
-}
-.progress-bar {
-  width: 0;
-  height: 100%;
-  background: var(--accent);
-  transition: width .2s;
-}
-.exercise {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  background: var(--panel);
-  border: 1px solid #30323a;
-  border-radius: 13px;
-  margin-bottom: 10px;
-}
-.exercise input {
-  width: 21px;
-  height: 21px;
-  accent-color: var(--accent);
-  flex-shrink: 0;
-}
-.exercise .name { font-weight: bold; }
-.exercise .detail {
-  color: var(--muted);
-  margin-top: 5px;
-  font-size: 14px;
-}
-.exercise.done .name {
-  text-decoration: line-through;
-  color: var(--muted);
-}
-footer {
-  text-align: center;
-  color: var(--muted);
-  padding: 25px;
-  font-size: 13px;
-}
-button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-@media (max-width: 420px) {
-  main { padding: 14px; }
-  header h1 { font-size: 24px; }
-  .week { font-size: 13px; padding: 12px 2px; }
-}
+:root{color-scheme:dark;--bg:#06101f;--panel:#0d1d32;--line:#203b5a;--blue:#168bff;--muted:#a8bdd6}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0b1c33,#030914 70%);color:#f3f7ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:28px 18px 18px;background:radial-gradient(ellipse at top right,#174a7c 0,transparent 55%)}
+h1{font-size:32px;margin:0 0 7px;font-weight:900;letter-spacing:-1px}h1 span{color:#168bff}.sub{color:#c4d5e9;margin:0;font-size:14px}
+main{padding:0 14px 28px;max-width:760px;margin:auto}.weekgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0 18px}
+.weekbtn{border:1px solid var(--line);background:linear-gradient(145deg,#122a45,#0a1728);color:white;border-radius:17px;padding:15px 12px;text-align:left;min-height:112px;cursor:pointer}
+.weekbtn .num{display:block;font-size:21px;font-weight:800;margin-bottom:7px}.weekbtn .desc{font-size:12px;color:#b5cbe3;line-height:1.5}.weekbtn.active{border:2px solid var(--blue);box-shadow:0 0 0 2px #168bff22}
+.icon{display:block;width:38px;height:38px;border-radius:12px;background:#123e69;margin-bottom:10px;position:relative}
+.icon:before{content:"";position:absolute;width:22px;height:9px;border-radius:50% 50% 35% 35%;background:#53b4ff;top:8px;left:8px}
+.icon:after{content:"";position:absolute;width:28px;height:12px;border:3px solid #53b4ff;border-top:0;border-radius:0 0 12px 12px;left:5px;top:18px}
+.section{background:#0b1a2c;border:1px solid #1b3450;border-radius:18px;padding:15px;margin-bottom:12px}
+h2{font-size:20px;margin:0 0 5px} .hint{font-size:12px;color:var(--muted);margin:0 0 13px}
+.exercise{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 0;border-top:1px solid #1c324b}
+.exercise:first-of-type{border-top:0}.exercise strong{display:block;font-size:15px;margin-bottom:5px}.exercise small{color:#a9c0da;line-height:1.5}
+a.play{display:inline-block;text-decoration:none;background:#1168c5;color:#fff;padding:10px 12px;border-radius:12px;font-size:12px;font-weight:700;white-space:nowrap}
+.notice{font-size:12px;line-height:1.7;color:#c0d0e3}
+footer{text-align:center;color:#7189a4;font-size:11px;padding:8px 12px 26px}
+@media(min-width:600px){.weekgrid{grid-template-columns:repeat(4,minmax(0,1fr))}.weekbtn{min-height:125px}}
 </style>
 </head>
 <body>
 <header>
-  <h1>WORKOUT PLAN</h1>
-  <p>4-WEEK TRAINING PROGRAM</p>
+<h1>어깨<span>4주</span></h1>
+<p class="sub">넓은 어깨와 탄탄한 상체를 위한 4주 운동 가이드</p>
 </header>
-
 <main>
-  <section class="hero">
-    <div class="tag">YOUR TRAINING JOURNEY</div>
-    <h2 id="weekTitle">1주차 · 기초 다지기</h2>
-    <p id="weekDescription">정확한 자세와 꾸준한 운동 습관에 집중하세요.</p>
-  </section>
-
-  <nav class="weeks" aria-label="주차 선택">
-    <button class="week active" data-week="1" aria-pressed="true">1주차</button>
-    <button class="week" data-week="2" aria-pressed="false">2주차</button>
-    <button class="week" data-week="3" aria-pressed="false">3주차</button>
-    <button class="week" data-week="4" aria-pressed="false">4주차</button>
-  </nav>
-
-  <section class="summary">
-    <div id="progressText">완료 0 / 4개 · 0%</div>
-    <div class="progress-track">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-  </section>
-
-  <section id="exerciseList" aria-live="polite"></section>
+<div class="weekgrid" id="weeks">
+<button class="weekbtn active" data-week="0"><span class="icon"></span><span class="num">1주차</span><span class="desc">자세 익히기<br>어깨 집중 + 삼두</span></button>
+<button class="weekbtn" data-week="1"><span class="icon"></span><span class="num">2주차</span><span class="desc">반복 횟수 늘리기<br>등 + 후면 어깨</span></button>
+<button class="weekbtn" data-week="2"><span class="icon"></span><span class="num">3주차</span><span class="desc">가능하면 중량 소폭 증가<br>가슴 + 어깨 보조</span></button>
+<button class="weekbtn" data-week="3"><span class="icon"></span><span class="num">4주차</span><span class="desc">기록 확인하기<br>등 + 이두 + 후면 어깨</span></button>
+</div>
+<section class="section" id="workout"></section>
+<section class="section">
+<h2>운동 가이드</h2>
+<p class="notice">• 시작 전 가벼운 유산소와 어깨 준비운동을 5~10분 합니다.<br>• 숄더 프레스·랫 풀다운은 세트 사이 2~3분, 보조 운동은 1~2분 쉽니다.<br>• 보통 1~3회 더 할 수 있는 정도에서 세트를 마칩니다.<br>• 정해진 반복 범위를 좋은 자세로 모두 채우면 다음 운동에서 중량을 조금 올려도 됩니다.<br>• 날카로운 어깨 통증이 생기면 해당 운동을 중단하세요.<br>• 수요일과 주말은 휴식 또는 가벼운 걷기로 회복합니다.</p>
+</section>
 </main>
-
-<footer>
-  운동 완료 상태는 이 브라우저에 자동 저장됩니다.
-</footer>
-
+<footer>어깨4주 · 운동 전 자신의 체력과 통증 상태를 고려하세요.</footer>
 <script>
-(function () {
-  "use strict";
-
-  const plans = {
-    1: {
-      title: "1주차 · 기초 다지기",
-      description: "정확한 자세와 꾸준한 운동 습관에 집중하세요.",
-      exercises: [
-        ["숄더 프레스", "3세트 × 12회"],
-        ["사이드 레터럴 레이즈", "3세트 × 15회"],
-        ["프론트 레이즈", "3세트 × 12회"],
-        ["덤벨 삼두 익스텐션", "3세트 × 12회"]
-      ]
-    },
-    2: {
-      title: "2주차 · 기초 강화",
-      description: "자세를 유지하며 자신의 운동 능력에 맞춰 진행하세요.",
-      exercises: [
-        ["숄더 프레스", "3세트 × 12회"],
-        ["사이드 레터럴 레이즈", "3세트 × 15회"],
-        ["리어 델트 플라이", "3세트 × 12회"],
-        ["케이블 푸시다운", "3세트 × 12회"]
-      ]
-    },
-    3: {
-      title: "3주차 · 운동 집중",
-      description: "반동을 줄이고 각 동작을 통제하며 운동하세요.",
-      exercises: [
-        ["숄더 프레스", "4세트 × 10회"],
-        ["사이드 레터럴 레이즈", "4세트 × 12회"],
-        ["리어 델트 플라이", "3세트 × 15회"],
-        ["덤벨 삼두 익스텐션", "3세트 × 12회"]
-      ]
-    },
-    4: {
-      title: "4주차 · 루틴 완성",
-      description: "무리하지 않고 정확한 자세로 한 달의 루틴을 마무리하세요.",
-      exercises: [
-        ["숄더 프레스", "3세트 × 10회"],
-        ["사이드 레터럴 레이즈", "3세트 × 15회"],
-        ["리어 델트 플라이", "3세트 × 15회"],
-        ["케이블 푸시다운", "3세트 × 12회"]
-      ]
-    }
-  };
-
-  const storageKey = "workout-plan-progress-v1";
-  let state = { week: 1, completed: {} };
-
-  try {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed && typeof parsed === "object") {
-        if (Number.isInteger(parsed.week) &&
-            parsed.week >= 1 && parsed.week <= 4) {
-          state.week = parsed.week;
-        }
-        if (parsed.completed &&
-            typeof parsed.completed === "object" &&
-            !Array.isArray(parsed.completed)) {
-          state.completed = parsed.completed;
-        }
-      }
-    }
-  } catch (error) {
-    console.warn("저장된 진행 상태를 불러오지 못했습니다.", error);
-  }
-
-  function saveState() {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(state));
-    } catch (error) {
-      console.warn("자동 저장에 실패했습니다.", error);
-    }
-  }
-
-  function render() {
-    const plan = plans[state.week];
-    document.getElementById("weekTitle").textContent = plan.title;
-    document.getElementById("weekDescription").textContent =
-      plan.description;
-
-    document.querySelectorAll(".week").forEach(function (button) {
-      const active = Number(button.dataset.week) === state.week;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-
-    const list = document.getElementById("exerciseList");
-    list.replaceChildren();
-
-    plan.exercises.forEach(function (exercise, index) {
-      const key = state.week + "-" + index;
-      const checked = state.completed[key] === true;
-
-      const item = document.createElement("label");
-      item.className = "exercise" + (checked ? " done" : "");
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = checked;
-      checkbox.setAttribute("aria-label", exercise[0] + " 완료");
-
-      const details = document.createElement("div");
-      const name = document.createElement("div");
-      name.className = "name";
-      name.textContent = exercise[0];
-
-      const detail = document.createElement("div");
-      detail.className = "detail";
-      detail.textContent = exercise[1];
-
-      details.append(name, detail);
-      item.append(checkbox, details);
-
-      checkbox.addEventListener("change", function () {
-        state.completed[key] = checkbox.checked;
-        saveState();
-        render();
-      });
-
-      list.appendChild(item);
-    });
-
-    const total = plan.exercises.length;
-    const done = plan.exercises.filter(function (_, index) {
-      return state.completed[state.week + "-" + index] === true;
-    }).length;
-
-    const percent = total ? Math.round(done / total * 100) : 0;
-    document.getElementById("progressText").textContent =
-      "완료 " + done + " / " + total + "개 · " + percent + "%";
-    document.getElementById("progressBar").style.width = percent + "%";
-  }
-
-  document.querySelectorAll(".week").forEach(function (button) {
-    button.addEventListener("click", function () {
-      state.week = Number(button.dataset.week);
-      saveState();
-      render();
-    });
-  });
-
-  render();
-})();
+const weeklyWorkouts=[
+[
+["월요일 · 어깨 집중 + 삼두",[
+["덤벨 숄더 프레스","3세트 × 8~12회","어깨 전체","덤벨 숄더 프레스 정확한 자세"],
+["덤벨 레터럴 레이즈","4세트 × 12~20회","측면 삼각근 · 핵심 운동","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 레터럴 레이즈","3세트 × 12~15회","케이블이 없으면 가벼운 덤벨로 대체","케이블 레터럴 레이즈 자세"],
+["케이블 트라이셉스 푸시다운","3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["화요일 · 등 + 후면 어깨",[
+["랫 풀다운","4세트 × 8~12회","등 너비","랫 풀다운 정확한 자세"],
+["체스트 서포티드 로우","3세트 × 8~12회","등 중앙과 두께","체스트 서포티드 로우 자세"],
+["리버스 펙덱 플라이","3세트 × 12~20회","후면 삼각근","리버스 펙덱 플라이 자세"],
+["스트레이트 암 풀다운","3세트 × 12~15회","광배근","스트레이트 암 풀다운 자세"]]],
+["목요일 · 가슴 + 어깨 보조",[
+["인클라인 덤벨 프레스","3세트 × 8~12회","윗가슴과 앞쪽 어깨","인클라인 덤벨 프레스 자세"],
+["체스트 프레스 머신","3세트 × 8~12회","가슴 전체","체스트 프레스 머신 자세"],
+["덤벨 레터럴 레이즈","3세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 푸시다운","2~3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["금요일 · 등 보완 + 이두 + 후면 어깨",[
+["어시스트 풀업 또는 랫 풀다운","3세트 × 8~12회","등 너비","어시스트 풀업 정확한 자세"],
+["시티드 케이블 로우","3세트 × 10~12회","등 중앙","시티드 케이블 로우 자세"],
+["덤벨 리어 델트 플라이","3세트 × 12~20회","후면 어깨","덤벨 리어 델트 플라이 자세"],
+["덤벨 바이셉스 컬","3세트 × 10~15회","이두근","덤벨 바이셉스 컬 정확한 자세"]]]
+],
+[
+["월요일 · 어깨 집중 + 삼두",[
+["덤벨 숄더 프레스","3세트 × 8~12회","자세를 유지하며 반복 횟수 향상","덤벨 숄더 프레스 정확한 자세"],
+["덤벨 레터럴 레이즈","4세트 × 12~20회","측면 삼각근 · 반동 최소화","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 레터럴 레이즈","3세트 × 12~15회","측면 삼각근","케이블 레터럴 레이즈 자세"],
+["케이블 트라이셉스 푸시다운","3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["화요일 · 등 + 후면 어깨",[
+["랫 풀다운","4세트 × 8~12회","가능하면 반복 횟수 조금 늘리기","랫 풀다운 정확한 자세"],
+["체스트 서포티드 로우","3세트 × 8~12회","등 중앙","체스트 서포티드 로우 자세"],
+["리버스 펙덱 플라이","3세트 × 12~20회","후면 삼각근","리버스 펙덱 플라이 자세"],
+["스트레이트 암 풀다운","3세트 × 12~15회","광배근","스트레이트 암 풀다운 자세"]]],
+["목요일 · 가슴 + 어깨 보조",[
+["인클라인 덤벨 프레스","3세트 × 8~12회","윗가슴","인클라인 덤벨 프레스 자세"],
+["체스트 프레스 머신","3세트 × 8~12회","가슴 전체","체스트 프레스 머신 자세"],
+["덤벨 레터럴 레이즈","3세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 푸시다운","2~3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["금요일 · 등 보완 + 이두 + 후면 어깨",[
+["어시스트 풀업 또는 랫 풀다운","3세트 × 8~12회","등 너비","어시스트 풀업 정확한 자세"],
+["시티드 케이블 로우","3세트 × 10~12회","등 중앙","시티드 케이블 로우 자세"],
+["덤벨 리어 델트 플라이","3세트 × 12~20회","후면 어깨","덤벨 리어 델트 플라이 자세"],
+["덤벨 바이셉스 컬","3세트 × 10~15회","이두근","덤벨 바이셉스 컬 정확한 자세"]]]
+],
+[
+["월요일 · 어깨 집중 + 삼두",[
+["덤벨 숄더 프레스","3세트 × 8~12회","모든 세트에서 자세가 좋으면 중량 소폭 증가 가능","덤벨 숄더 프레스 정확한 자세"],
+["덤벨 레터럴 레이즈","4세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 레터럴 레이즈","3세트 × 12~15회","측면 삼각근","케이블 레터럴 레이즈 자세"],
+["케이블 트라이셉스 푸시다운","3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["화요일 · 등 + 후면 어깨",[
+["랫 풀다운","4세트 × 8~12회","모든 세트 목표 반복 달성 시 중량 소폭 증가 가능","랫 풀다운 정확한 자세"],
+["체스트 서포티드 로우","3세트 × 8~12회","등 중앙","체스트 서포티드 로우 자세"],
+["리버스 펙덱 플라이","3세트 × 12~20회","후면 삼각근","리버스 펙덱 플라이 자세"],
+["스트레이트 암 풀다운","3세트 × 12~15회","광배근","스트레이트 암 풀다운 자세"]]],
+["목요일 · 가슴 + 어깨 보조",[
+["인클라인 덤벨 프레스","3세트 × 8~12회","윗가슴","인클라인 덤벨 프레스 자세"],
+["체스트 프레스 머신","3세트 × 8~12회","가슴 전체","체스트 프레스 머신 자세"],
+["덤벨 레터럴 레이즈","3세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 푸시다운","2~3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["금요일 · 등 보완 + 이두 + 후면 어깨",[
+["어시스트 풀업 또는 랫 풀다운","3세트 × 8~12회","등 너비","어시스트 풀업 정확한 자세"],
+["시티드 케이블 로우","3세트 × 10~12회","등 중앙","시티드 케이블 로우 자세"],
+["덤벨 리어 델트 플라이","3세트 × 12~20회","후면 어깨","덤벨 리어 델트 플라이 자세"],
+["덤벨 바이셉스 컬","3세트 × 10~15회","이두근","덤벨 바이셉스 컬 정확한 자세"]]]
+],
+[
+["월요일 · 어깨 집중 + 삼두",[
+["덤벨 숄더 프레스","3세트 × 8~12회","자세를 유지하며 운동 기록 점검","덤벨 숄더 프레스 정확한 자세"],
+["덤벨 레터럴 레이즈","4세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 레터럴 레이즈","3세트 × 12~15회","측면 삼각근","케이블 레터럴 레이즈 자세"],
+["케이블 트라이셉스 푸시다운","3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["화요일 · 등 + 후면 어깨",[
+["랫 풀다운","4세트 × 8~12회","이전 주 기록과 비교","랫 풀다운 정확한 자세"],
+["체스트 서포티드 로우","3세트 × 8~12회","등 중앙","체스트 서포티드 로우 자세"],
+["리버스 펙덱 플라이","3세트 × 12~20회","후면 삼각근","리버스 펙덱 플라이 자세"],
+["스트레이트 암 풀다운","3세트 × 12~15회","광배근","스트레이트 암 풀다운 자세"]]],
+["목요일 · 가슴 + 어깨 보조",[
+["인클라인 덤벨 프레스","3세트 × 8~12회","윗가슴","인클라인 덤벨 프레스 자세"],
+["체스트 프레스 머신","3세트 × 8~12회","가슴 전체","체스트 프레스 머신 자세"],
+["덤벨 레터럴 레이즈","3세트 × 12~20회","측면 삼각근","덤벨 레터럴 레이즈 정확한 자세"],
+["케이블 푸시다운","2~3세트 × 10~15회","삼두근","케이블 푸시다운 정확한 자세"]]],
+["금요일 · 등 보완 + 이두 + 후면 어깨",[
+["어시스트 풀업 또는 랫 풀다운","3세트 × 8~12회","등 너비","어시스트 풀업 정확한 자세"],
+["시티드 케이블 로우","3세트 × 10~12회","등 중앙","시티드 케이블 로우 자세"],
+["덤벨 리어 델트 플라이","3세트 × 12~20회","후면 어깨","덤벨 리어 델트 플라이 자세"],
+["덤벨 바이셉스 컬","3세트 × 10~15회","이두근","덤벨 바이셉스 컬 정확한 자세"]]]
+]
+];
+const weekNotes=[
+"1주차: 가벼운 중량으로 자세와 운동 범위를 익힙니다.",
+"2주차: 같은 중량으로 반복 횟수를 조금 늘려 봅니다.",
+"3주차: 모든 세트에서 목표 반복을 좋은 자세로 달성했다면 중량을 소폭 높입니다.",
+"4주차: 무리하지 말고 이전 주의 반복 횟수와 중량 기록을 비교합니다."
+];
+function render(i){document.querySelectorAll(".weekbtn").forEach((b,n)=>b.classList.toggle("active",n===i));let groups=weeklyWorkouts[i];document.getElementById("workout").innerHTML=`<h2>${i+1}주차 운동 계획</h2><p class="hint">${weekNotes[i]} 수요일·주말은 회복일로 둡니다.</p>`+groups.map(g=>`<h3 style="font-size:15px;margin:18px 0 4px;color:#79bdff">${g[0]}</h3>`+g[1].map((e,n)=>`<div class="exercise"><div><strong>${n+1}. ${e[0]}</strong><small>${e[1]}<br>${e[2]}</small></div><a class="play" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e[3])}">▶ 영상 보기</a></div>`).join("")).join("");}
+document.querySelectorAll(".weekbtn").forEach((b,n)=>b.classList.toggle("active",n===i));let w=data[i];document.getElementById("workout").innerHTML=`<h2>${w.title}</h2><p class="hint">${w.goal}</p>`+w.items.map((e,n)=>`<div class="exercise"><div><strong>${n+1}. ${e[0]}</strong><small>${e[1]}<br>${e[2]}</small></div><a class="play" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e[3])}">▶ 영상 보기</a></div>`).join("");}
+document.querySelectorAll(".weekbtn").forEach(b=>b.addEventListener("click",()=>render(Number(b.dataset.week))));render(0);
+if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./sw.js").catch(()=>{});
 </script>
-</body>
-</html>
+</body></html>
